@@ -1,0 +1,120 @@
+{
+  "id": "default",
+  "name": "My Assistant",
+  "description": "Your personal AI assistant",
+  "workspace_dir": "C:\\Users\\YOUR_USERNAME\\.copaw\\workspaces\\default",
+  
+  "language": "zh",
+  "approval_level": "AUTO",
+  
+  "system_prompt_files": [
+    "AGENTS.md",
+    "SOUL.md",
+    "PROFILE.md",
+    "MEMORY.md",
+    "SKILL_REGISTRY.md"
+  ],
+  
+  "active_model": {
+    "provider_id": "YOUR_PROVIDER_ID",
+    "model": "YOUR_MODEL_NAME"
+  },
+  
+  "llm_routing": {
+    "enabled": false,
+    "mode": "local_first"
+  },
+  
+  "memory_manager_backend": "remelight",
+  "reme_light_memory_config": {
+    "summarize_when_compact": true,
+    "dream_cron": "0 23 * * *",
+    "auto_memory_search_config": {
+      "enabled": false,
+      "max_results": 2,
+      "min_score": 0.3
+    },
+    "embedding_model_config": {
+      "backend": "openai",
+      "api_key": "",
+      "base_url": "",
+      "model_name": "",
+      "dimensions": 1024
+    },
+    "rebuild_memory_index_on_start": false
+  },
+  
+  "daily_memory_dir": "memory",
+  
+  "context_manager_backend": "light",
+  "light_context_config": {
+    "dialog_path": "dialog",
+    "token_count_estimate_divisor": 4.0,
+    "context_compact_config": {
+      "enabled": true,
+      "compact_threshold_ratio": 0.8,
+      "reserve_threshold_ratio": 0.1,
+      "compact_with_thinking_block": true
+    },
+    "tool_result_pruning_config": {
+      "enabled": true,
+      "pruning_recent_n": 2,
+      "pruning_old_msg_max_bytes": 3000,
+      "pruning_recent_msg_max_bytes": 50000,
+      "offload_retention_days": 5,
+      "tool_results_cache": "tool_results",
+      "exempt_file_extensions": [".md"],
+      "exempt_tool_names": ["chat_with_agent"]
+    }
+  },
+  
+  "channels": {
+    "console": {
+      "enabled": true
+    },
+    "weixin": {
+      "enabled": false,
+      "port": 8099
+    },
+    "dingtalk": {
+      "enabled": false
+    }
+  },
+  
+  "mcp": {
+    "clients": {}
+  },
+  
+  "running": {
+    "max_iters": 1000,
+    "shell_command_timeout": 60.0,
+    "max_input_length": 100000,
+    "history_max_length": 10000
+  },
+  
+  "tools": {
+    "builtin_tools": {
+      "execute_shell_command": { "enabled": true },
+      "read_file": { "enabled": true },
+      "write_file": { "enabled": true },
+      "edit_file": { "enabled": true },
+      "grep_search": { "enabled": true },
+      "glob_search": { "enabled": true },
+      "browser_use": { "enabled": true },
+      "desktop_screenshot": { "enabled": true },
+      "view_image": { "enabled": true },
+      "view_video": { "enabled": true },
+      "send_file_to_user": { "enabled": true },
+      "get_current_time": { "enabled": true },
+      "set_user_timezone": { "enabled": true },
+      "get_token_usage": { "enabled": true },
+      "list_agents": { "enabled": true },
+      "chat_with_agent": { "enabled": true },
+      "submit_to_agent": { "enabled": true },
+      "check_agent_task": { "enabled": true },
+      "memory_search": { "enabled": true },
+      "web_search": { "enabled": true },
+      "send_http_request": { "enabled": true }
+    }
+  }
+}

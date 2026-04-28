@@ -1,0 +1,51 @@
+MIT License
+
+Copyright (c) 2024 CoPaw Awesome Starter
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+
+---
+
+## 第三方组件许可证
+
+本项目整合了以下开源组件：
+
+### agent-skills (addyosmani)
+MIT License
+https://github.com/addyosmani/agent-skills
+
+### skills (mattpocock)  
+MIT License
+https://github.com/mattpocock/skills
+
+### superpowers (obra)
+MIT License
+https://github.com/obra/superpowers
+
+### Pask (xzf-thu)
+CC BY-NC-SA 4.0
+https://github.com/xzf-thu/Pask
+
+---
+
+## QwenPaw
+
+本项目基于 QwenPaw 框架构建。
+QwenPaw 采用专有许可证。
+https://github.com/your-qwenpaw-repo
