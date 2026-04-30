@@ -1,6 +1,6 @@
 # 🎉 CoPaw Awesome Starter
 
-> 一键启动你的 AI 个人助手，基于 QwenPaw 框架
+> 一键启动你的 AI 个人助手，基于 QwenPaw/CoPaw 框架
 
 **让任何人都能像使用模板一样，快速搭建自己的 AI 工作环境。**
 
@@ -10,7 +10,7 @@
 
 - 🧠 **智能记忆系统** - 自动整理会话记忆，学习你的习惯
 - 🔌 **即插即用 Skills** - 整合多个顶级开源 Skills 项目
-- 🔄 **空闲进化** - 你空闲时自动学习新技能并汇报
+- 🔄 **空闲进化 (v2)** - 你空闲时自动分析纠正模式、识别痛点、搜索 GitHub 方案
 - 📚 **科研工作流** - 文献调研→仿真验证→论文写作完整支持
 - 🌐 **多渠道支持** - 微信、钉钉、QQ、Discord 等
 
@@ -18,36 +18,38 @@
 
 ## 🚀 快速开始
 
-### 一键安装
+### 方式一：Windows 任务计划（推荐）
 
-**Linux / macOS:**
-```bash
-curl -fsSL https://your-domain.com/install.sh | bash
-```
-
-**Windows:**
 ```batch
-curl -fsSL https://your-domain.com/install.cmd | cmd
+# 以管理员身份运行
+scripts\task_scheduler\create_task.bat
 ```
 
-或者手动：
+### 方式二：手动运行
 
 ```bash
-# 1. 安装 QwenPaw
-pip install qwenpaw
+# 查看状态
+python scripts/idle_evolution.py --status
 
-# 2. 克隆本模板
-git clone https://github.com/YOUR_USERNAME/copaw-awesome-starter.git
-cd copaw-awesome-starter
+# 手动触发进化
+python scripts/idle_evolution.py --run
 
-# 3. 运行安装脚本
+# 持续监控模式
+python scripts/idle_evolution.py --monitor
+```
+
+### 方式三：克隆安装
+
+```bash
+# 1. 克隆模板
+git clone https://github.com/hlhjs/qwenpaw-idle-evolution.git
+cd qwenpaw-idle-evolution
+
+# 2. 运行安装脚本
 install.cmd  # Windows
 ./install.sh  # Linux/macOS
 
-# 4. 配置 API keys
-notepad ~/.copaw/workspaces/default/agent.json
-
-# 5. 启动
+# 3. 启动 CoPaw
 copaw
 ```
 
@@ -56,21 +58,50 @@ copaw
 ## 📁 项目结构
 
 ```
-copaw-awesome-starter/
+qwenpaw-idle-evolution/
 ├── README.md                    # 本文件
-├── install.sh / install.cmd     # 一键安装脚本
-├── LICENSE                     # 许可证
-├── config/                     # 配置模板
-│   ├── agent.json.template
-│   ├── AGENTS.md.template
-│   └── ...
+├── LICENSE                     # MIT 许可证
+├── install.sh / install.cmd    # 一键安装脚本
+├── scripts/
+│   ├── idle_evolution.py      # 空闲进化服务 v2
+│   ├── idle_evolution.py.bak  # 旧版本备份
+│   └── task_scheduler/
+│       └── create_task.bat     # Windows 任务计划创建
 ├── skills/                     # 核心 Skills
 │   ├── autonomous-learner/     # 空闲进化
-│   ├── spec-driven/            # 规格驱动开发
+│   ├── spec-driven/           # 规格驱动开发
 │   └── ...
-└── scripts/
-    └── idle_evolution.py       # 空闲进化服务
+├── config/                     # 配置模板
+└── docs/                      # 详细文档
 ```
+
+---
+
+## 🧠 空闲进化 v2 工作原理
+
+```
+用户空闲 > 60分钟
+    ↓
+┌─────────────────────────────────────────────┐
+│ 1. CorrectionAnalyzer - 分析纠正模式          │
+│ 2. PainPointAnalyzer - 识别用户痛点          │
+│ 3. SkillDiscoverer - GitHub 搜索方案        │
+│ 4. SkillManager - 创建/更新 Skills          │
+│ 5. MemoryUpdater - 更新记忆                  │
+│ 6. CopawNotifier - 通知用户                 │
+└─────────────────────────────────────────────┘
+    ↓
+生成进化报告 → 写入记忆 → 进入冷却期（120分钟）
+```
+
+### 配置参数
+
+| 环境变量 | 默认值 | 说明 |
+|---------|--------|------|
+| `IDLE_THRESHOLD_MINUTES` | 60 | 触发阈值（分钟） |
+| `IDLE_COOLDOWN` | 120 | 冷却期（分钟） |
+| `COPAW_WORKSPACE` | `~/.copaw/...` | CoPaw 工作空间 |
+| `GITHUB_TOKEN` | 空 | GitHub Token（可选） |
 
 ---
 
@@ -88,46 +119,17 @@ copaw-awesome-starter/
 
 ---
 
-## ⚙️ 配置说明
-
-编辑 `~/.copaw/workspaces/default/agent.json`，填入你的 API keys：
-
-```json
-{
-  "active_model": {
-    "provider_id": "your-provider",
-    "model": "your-model"
-  }
-}
-```
-
-### 启用 CoPaw 内置记忆系统
-
-```json
-{
-  "memory_manager_backend": "remelight",
-  "reme_light_memory_config": {
-    "dream_cron": "0 23 * * *"
-  }
-}
-```
-
----
-
 ## 📖 详细文档
 
-- [Getting Started](docs/GETTING_STARTED.md) - 详细入门指南
-- [Skills 使用指南](docs/SKILLS_GUIDE.md) - 各 Skill 的使用说明
-- [科研工作流](docs/RESEARCH_WORKFLOW.md) - 如何做研究
-- [空闲进化](docs/IDLE_EVOLUTION.md) - 自动学习机制
+- [空闲进化 RFC 提案](RFC_IDLE_EVOLUTION.md) - 功能设计和实现细节
+- [安装指南](docs/INSTALL.md) - 详细安装步骤
+- [配置说明](docs/CONFIG.md) - 环境变量配置
 
 ---
 
 ## 🤝 贡献
 
 欢迎提交 Issue 和 Pull Request！
-
----
 
 ## 📄 许可证
 
@@ -142,4 +144,4 @@ MIT License - 详见 [LICENSE](LICENSE)
 - [addyosmani/agent-skills](https://github.com/addyosmani/agent-skills)
 - [mattpocock/skills](https://github.com/mattpocock/skills)
 - [obra/superpowers](https://github.com/obra/superpowers)
-- [xzf-thu/Pask](https://github.com/xzf-thu/Pask)
+- [xzf-thu/Pask](https://github.com/xzf-thu/Pask) - 灵感来源
